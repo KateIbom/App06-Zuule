@@ -1,0 +1,4 @@
+public enum Items
+{
+    NONE, BOOK, WATER, TABLET, KEY, CHAIR, BAG, VACCINE, POGO_STICK, CALCULATOR
+}

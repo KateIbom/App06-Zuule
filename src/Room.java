@@ -1,6 +1,5 @@
 import java.util.Set;
 import java.util.HashMap;
-import java.util.Iterator;
 
 /**
  * Class Room - a room in an adventure game.
@@ -18,6 +17,8 @@ import java.util.Iterator;
 
 public class Room 
 {
+    private String name;
+    private Items item;
     private String description;
     // String is the key to a room in that direction
     // east would be an exit that goes to the Room
@@ -27,11 +28,13 @@ public class Room
      * Create a room described "description". Initially, it has
      * no exits. "description" is something like "a kitchen" or
      * "an open court yard".
+     * @param item
      * @param description The room's description.
      */
-    public Room(String description) 
+    public Room(String name, Items item)
     {
-        this.description = description;
+        this.item = item;
+        this.name = name;
         exits = new HashMap<>();
     }
 
@@ -51,7 +54,7 @@ public class Room
      */
     public String getShortDescription()
     {
-        return description;
+        return name;
     }
 
     /**
@@ -61,8 +64,9 @@ public class Room
      * @return A long description of this room
      */
     public String getLongDescription()
+
     {
-        return "You are " + description + ".\n" + getExitString();
+        return "You are " + name + " " + description + ".\n" + getExitString();
     }
 
     /**
@@ -91,6 +95,36 @@ public class Room
     public Room getExit(String direction) 
     {
         return exits.get(direction);
+    }
+
+    public void setDescription(String description)
+    {
+        this.description = description;
+    }
+
+    public void setItem(Items item)
+    {
+        this.item = item;
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public String getDescription()
+    {
+        return description;
+    }
+
+    public void printItems()
+    {
+        System.out.println("items in room " + item );
     }
 }
 
