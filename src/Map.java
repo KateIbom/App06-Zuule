@@ -17,30 +17,31 @@ public class Map
 
     private void createRooms()
     {
-        Room outside, theater, pub, lab, office;
+        phamacy, supermarket, library, court_house, judges_office;
 
         // create the rooms
-        outside = new Room("outside the main entrance of the university", Items.POGO_STICK);
-        theater = new Room("in a lecture theater", Items.BOOK);
-        pub = new Room( "in the campus pub", Items.WATER);
-        lab = new Room("in a computing lab", Items.CALCULATOR);
-        office = new Room("in the computing admin office", Items.VACCINE);
+        pharmacy = new Room("outside the main entrance of the university",
+                Items.MASTERKEY, items.FLASHLIGHT);
+        supermarket = new Room("in a lecture theater", items.PEPPERSPRAY);
+        library = new Room( "in the campus pub", Items.BOOK);
+        court_house = new Room("in a computing lab", Items.COIN);
+        judgesoffice = new Room("in the computing admin office", Items.RING);
 
         // initialise room exits
-        outside.setExit("east", theater);
-        outside.setExit("south", lab);
-        outside.setExit("west", pub);
+        outside.setExit("east", phamacy);
+        outside.setExit("south", supermarket);
+        outside.setExit("west", ouside);
 
         theater.setExit("west", outside);
 
         pub.setExit("east", outside);
 
         lab.setExit("north", outside);
-        lab.setExit("east", office);
+        lab.setExit("east", library);
 
-        office.setExit("west", lab);
+        office.setExit("west", court_house);
 
-        startRoom = outside;  // start game outside
+        startRoom = pharmacy;  // start game outside
     }
 
     /**
