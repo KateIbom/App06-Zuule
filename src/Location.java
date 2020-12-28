@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.HashMap;
 
@@ -15,25 +16,26 @@ import java.util.HashMap;
  * @version 2016.02.29
  */
 
-public class Room 
+public class Location
 {
     private String name;
-    private Items item;
+    private ArrayList<Items> itemList;
     private String description;
     // String is the key to a room in that direction
     // east would be an exit that goes to the Room
-    private HashMap<String, Room> exits;
+    private HashMap<String, Location> exits;
 
     /**
      * Create a room described "description". Initially, it has
      * no exits. "description" is something like "a kitchen" or
      * "an open court yard".
      * @param item
-     * @param description The room's description.
      */
-    public Room(String name, Items item)
+    public Location(String name, Items item)
     {
-        this.item = item;
+        this.itemList = new ArrayList<>();
+        itemList.add(item);
+
         this.name = name;
         exits = new HashMap<>();
     }
@@ -43,7 +45,7 @@ public class Room
      * @param direction The direction of the exit.
      * @param neighbor  The room to which the exit leads.
      */
-    public void setExit(String direction, Room neighbor) 
+    public void setExit(String direction, Location neighbor)
     {
         exits.put(direction, neighbor);
     }
@@ -92,7 +94,7 @@ public class Room
      * @param direction The exit's direction.
      * @return The room in the given direction.
      */
-    public Room getExit(String direction) 
+    public Location getExit(String direction)
     {
         return exits.get(direction);
     }
@@ -104,7 +106,7 @@ public class Room
 
     public void setItem(Items item)
     {
-        this.item = item;
+        this.itemList.add(item);
     }
 
     public void setName(String name)
@@ -124,7 +126,12 @@ public class Room
 
     public void printItems()
     {
-        System.out.println("items in room " + item );
+        System.out.print("items in room ");
+        for (Items item: itemList)
+        {
+            System.out.print(item);
+        }
+        System.out.println();
     }
 }
 

@@ -1,55 +1,74 @@
 public class Map
 {
-    private Room startRoom;
+    private Location pharmacy;
+    private Location superMarket;
+    private Location library;
+    private Location courtHouse;
+    private Location judgesOffice;
+    private Location postOffice;
+    private Location barclaysBank;
+    private Location jail;
+    private Location townHall;
+    private Location townCenter;
+    private Location clockTower;
+    private Location startLocation;
+
 
     /**
      *
      */
     public Map ()
     {
-        createRooms();
+        createLocations();
     }
 
 
     /**
-     * Create all the rooms and link their exits together.
+     * Create all the locations and link their exits together.
      */
 
-    private void createRooms()
+    private void createLocations()
     {
-        phamacy, supermarket, library, court_house, judges_office;
 
         // create the rooms
-        pharmacy = new Room("outside the main entrance of the university",
-                Items.MASTERKEY, items.FLASHLIGHT);
-        supermarket = new Room("in a lecture theater", items.PEPPERSPRAY);
-        library = new Room( "in the campus pub", Items.BOOK);
-        court_house = new Room("in a computing lab", Items.COIN);
-        judgesoffice = new Room("in the computing admin office", Items.RING);
+        townCenter = new Location("town center", Items.COIN);
+        pharmacy = new Location("inside the pharmacy",
+                Items.MASTER_KEY);
+        superMarket = new Location("in the supermarket isle", Items.PEPPER_SPRAY);
+        library = new Location( "standing by the return desk", Items.BOOK);
+        courtHouse = new Location("you are in front of the judges bench", Items.COIN);
+        judgesOffice = new Location("by the judges desk", Items.RING);
 
+        initialiseLocations();
+
+        startLocation = townCenter;  // start game outside
+    }
+
+    private void initialiseLocations()
+    {
         // initialise room exits
-        outside.setExit("east", phamacy);
-        outside.setExit("south", supermarket);
-        outside.setExit("west", ouside);
+        townCenter.setExit("pharmacy", pharmacy);
+        pharmacy.setExit("outside", townCenter);
 
-        theater.setExit("west", outside);
+        townCenter.setExit("supermarket", superMarket);
+        superMarket.setExit("outside", pharmacy);
 
-        pub.setExit("east", outside);
+        townCenter.setExit("library", library);
+        library.setExit("outside", courtHouse);
 
-        lab.setExit("north", outside);
-        lab.setExit("east", library);
+        townCenter.setExit("courthouse", courtHouse);
+        courtHouse.setExit("inside", judgesOffice);
 
-        office.setExit("west", court_house);
-
-        startRoom = pharmacy;  // start game outside
+        townCenter.setExit("townhall", townHall);
+        townHall.setExit("outside", townCenter);
     }
 
     /**
      *
      * @return
      */
-    public Room getStartRoom()
+    public Location getStartRoom()
     {
-        return startRoom;
+        return startLocation;
     }
 }

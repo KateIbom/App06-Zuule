@@ -21,7 +21,7 @@ public class Game
 {
     private Map map;
     private Parser parser;
-    private Room currentRoom;
+    private Location currentLocation;
     private Player player;
         
     /**
@@ -31,7 +31,7 @@ public class Game
     {
         parser = new Parser();
         map = new Map();
-        currentRoom = map.getStartRoom();
+        currentLocation = map.getStartRoom();
         player = new Player( "John");
         play();
     }
@@ -67,7 +67,7 @@ public class Game
         System.out.println("World of Zuul is a new, incredibly boring adventure game.");
         System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
         System.out.println();
-        System.out.println(currentRoom.getLongDescription());
+        System.out.println(currentLocation.getLongDescription());
     }
 
     /**
@@ -108,7 +108,7 @@ public class Game
 
     private void printItems()
     {
-        currentRoom.printItems();
+        currentLocation.printItems();
     }
 
     // implementations of user commands:
@@ -143,14 +143,15 @@ public class Game
         String direction = command.getSecondWord();
 
         // Try to leave current room.
-        Room nextRoom = currentRoom.getExit(direction);
+        Location nextLocation = currentLocation.getExit(direction);
 
-        if (nextRoom == null) {
+        if (nextLocation == null) {
             System.out.println("There is no door!");
         }
         else {
-            currentRoom = nextRoom;
-            System.out.println(currentRoom.getLongDescription());
+            currentLocation = nextLocation;
+            System.out.println(currentLocation.getLongDescription());
+            currentLocation.printItems();
         }
     }
 
