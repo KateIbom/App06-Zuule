@@ -32,12 +32,17 @@ public class Map
 
         // create the rooms
         townCenter = new Location("town center", Items.COIN);
+        townHall = new Location("town hall", Items. COIN);
+        clockTower = new Location ("open new dimension", Items.COIN);
         pharmacy = new Location("inside the pharmacy",
                 Items.MASTER_KEY);
         superMarket = new Location("in the supermarket isle", Items.PEPPER_SPRAY);
         library = new Location( "standing by the return desk", Items.BOOK);
+        barclaysBank = new Location("you are with the assistant", Items.CHEQUE);
+        postOffice = new Location("you are by the cashier", Items.LETTER);
         courtHouse = new Location("you are in front of the judges bench", Items.COIN);
         judgesOffice = new Location("by the judges desk", Items.RING);
+        jail = new Location("you are sitting inside the cell", Items.LAW);
 
         initialiseLocations();
 
@@ -59,8 +64,20 @@ public class Map
         townCenter.setExit("courthouse", courtHouse);
         courtHouse.setExit("inside", judgesOffice);
 
+        judgesOffice.setExit("courthouse", courtHouse);
+        courtHouse.setExit("outside", townCenter);
+
         townCenter.setExit("townhall", townHall);
         townHall.setExit("outside", townCenter);
+
+        townCenter.setExit("barclaysBank", barclaysBank);
+        barclaysBank.setExit("outside", postOffice);
+
+        townCenter.setExit("postOffice", postOffice);
+        postOffice.setExit("outside", townCenter);
+
+        townHall.setExit("clockTower", clockTower);
+        clockTower.setExit("inside", townHall);
     }
 
     /**
