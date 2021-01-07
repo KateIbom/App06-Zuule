@@ -67,6 +67,9 @@ public class Map
         judgesOffice.setExit("courthouse", courtHouse);
         courtHouse.setExit("outside", townCenter);
 
+        courtHouse.setExit("courthouse", jail);
+        jail.setExit("inside", courtHouse);
+
         townCenter.setExit("townhall", townHall);
         townHall.setExit("outside", townCenter);
 
