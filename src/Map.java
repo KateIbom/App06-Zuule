@@ -20,6 +20,8 @@ public class Map
     public Map ()
     {
         createLocations();
+        initialiseLocations();
+        setRequiredItems();
     }
 
 
@@ -44,11 +46,11 @@ public class Map
         judgesOffice = new Location("by the judges desk", Items.RING);
         jail = new Location("you are sitting inside the cell", Items.LAW);
 
-        initialiseLocations();
+
 
         startLocation = townCenter;  // start game outside
     }
-
+    //
     private void initialiseLocations()
     {
         // initialise room exits
@@ -82,6 +84,12 @@ public class Map
         townHall.setExit("clockTower", clockTower);
         clockTower.setExit("inside", townHall);
     }
+
+    private void setRequiredItems ()
+    {
+        library.setRequiredItem(Items.BOOK);
+    }//TODO complete for every location
+
 
     /**
      *

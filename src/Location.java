@@ -1,3 +1,4 @@
+import javax.lang.model.element.Name;
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.HashMap;
@@ -19,8 +20,15 @@ import java.util.HashMap;
 public class Location
 {
     private String name;
-    private ArrayList<Items> itemList;
     private String description;
+
+    // This is the item the room contains
+    private Items containedItem;
+
+    // This is the item that is needed to enter
+    private Items requiredItem;
+
+    //private String description;
     // String is the key to a room in that direction
     // east would be an exit that goes to the Room
     private HashMap<String, Location> exits;
@@ -31,13 +39,18 @@ public class Location
      * "an open court yard".
      * @param item
      */
-    public Location(String name, Items item)
+    public Location(String description, Items item)
     {
-        this.itemList = new ArrayList<>();
-        itemList.add(item);
+        name = this.getClass().getSimpleName(); //use the name of the class as the name of the location
+        containedItem = item;
 
-        this.name = name;
+        this.description = description;
         exits = new HashMap<>();
+    }
+
+    public String getName()
+    {
+        return name;
     }
 
     /**
@@ -56,7 +69,7 @@ public class Location
      */
     public String getShortDescription()
     {
-        return name;
+        return description;
     }
 
     /**
@@ -68,7 +81,10 @@ public class Location
     public String getLongDescription()
 
     {
-        return "You are " + name + " " + description + ".\n" + getExitString();
+
+        return "You are " + description + " " + description +
+                ".\n" + getExitString() +
+                "\n Item in the room is " + containedItem;
     }
 
     /**
@@ -88,6 +104,16 @@ public class Location
         return returnString;
     }
 
+    public void setRequiredItem(Items requiredItem)
+    {
+        this.requiredItem = requiredItem;
+    }
+
+    public Items getRequiredItem()
+    {
+        return requiredItem;
+    }
+
     /**
      * Return the room that is reached if we go from this room in direction
      * "direction". If there is no room in that direction, return null.
@@ -99,38 +125,30 @@ public class Location
         return exits.get(direction);
     }
 
+    public void setContainedItem(Items item)
+    {
+        containedItem = item;
+    }
+
+    public Items getContainedItem()
+    {
+        return containedItem;
+    }
+
+    public void removeContainedItem()
+    {
+        containedItem = Items.NONE;
+    }
+
     public void setDescription(String description)
     {
         this.description = description;
     }
 
-    public void setItem(Items item)
-    {
-        this.itemList.add(item);
-    }
 
-    public void setName(String name)
+    public void printItem()
     {
-        this.name = name;
-    }
-
-    public String getName()
-    {
-        return name;
-    }
-
-    public String getDescription()
-    {
-        return description;
-    }
-
-    public void printItems()
-    {
-        System.out.print("items in room ");
-        for (Items item: itemList)
-        {
-            System.out.print(item);
-        }
+        System.out.print("Item contained in room " + containedItem);
         System.out.println();
     }
 }

@@ -17,43 +17,43 @@
  * Modified and extended by Derek and Andrei
  */
 
-public class Game 
+public class Game
 {
     private Map map;
     private Parser parser;
     private Location currentLocation;
     private Player player;
-        
+
     /**
      * Create the game and initialise its internal map.
      */
-    public Game() 
+    public Game()
     {
         parser = new Parser();
         map = new Map();
         currentLocation = map.getStartRoom();
-        player = new Player( "John");
+        player = new Player("John");
         play();
     }
 
     /**
-     *  Main play routine.  Loops until end of play.
+     * Main play routine.  Loops until end of play.
      */
-    public void play() 
-    {            
+    public void play()
+    {
         printWelcome();
 
         // Enter the main command loop.  Here we repeatedly read commands and
         // execute them until the game is over.
-                
+
         boolean finished = false;
-        
-        while (! finished) 
+
+        while (!finished)
         {
             Command command = parser.getCommand();
             finished = processCommand(command);
         }
-        
+
         System.out.println("Thank you for playing.  Good bye.");
     }
 
@@ -72,16 +72,17 @@ public class Game
 
     /**
      * Given a command, process (that is: execute) the command.
+     *
      * @param command The command to be processed.
      * @return true If the command ends the game, false otherwise.
      */
-    private boolean processCommand(Command command) 
+    private boolean processCommand(Command command)
     {
         boolean wantToQuit = false;
 
         CommandWord commandWord = command.getCommandWord();
 
-        switch (commandWord) 
+        switch (commandWord)
         {
             case UNKNOWN:
                 System.out.println("I don't know what you mean...");
@@ -92,11 +93,15 @@ public class Game
                 break;
 
             case LOOK:
-                printItems();
+                System.out.println(currentLocation.getLongDescription());
                 break;
 
             case GO:
-                goRoom(command);
+                goLocation(command);
+                break;
+
+            case TAKE:
+
                 break;
 
             case QUIT:
@@ -106,9 +111,12 @@ public class Game
         return wantToQuit;
     }
 
-    private void printItems()
+    private void takeItem()
     {
-        currentLocation.printItems();
+        System.out.println("\nYou have taken the " +
+                currentLocation.getContainedItem() +"\n");
+
+        player.takeItem(currentLocation.getContainedItem());
     }
 
     // implementations of user commands:
@@ -131,7 +139,7 @@ public class Game
      * Try to go in one direction. If there is an exit, enter the new
      * room, otherwise print an error message.
      */
-    private void goRoom(Command command) 
+    private void goLocation(Command command)
     {
         if(!command.hasSecondWord()) 
         {
@@ -145,14 +153,45 @@ public class Game
         // Try to leave current room.
         Location nextLocation = currentLocation.getExit(direction);
 
-        if (nextLocation == null) {
+        enterLocation(nextLocation);
+
+    }
+
+    private void enterLocation(Location nextLocation)
+    {
+        if (nextLocation == null)
+        {
             System.out.println("There is no door!");
         }
-        else {
-            currentLocation = nextLocation;
-            System.out.println(currentLocation.getLongDescription());
-            currentLocation.printItems();
+        else
+        {
+            if (player.hasItem(nextLocation.getRequiredItem()))
+            {
+                currentLocation = nextLocation;
+                System.out.println(currentLocation.getLongDescription());
+                currentLocation.printItem();
+            }
+            else {
+                System.out.println("You cannot enter this room because you do not have a" + nextLocation.getRequiredItem());
+                currentLocation.printItem();
+                System.out.println(currentLocation.getLongDescription());
+                currentLocation.printItem();
+            }
+
         }
+    }
+
+    private boolean canEnterLocation(Location nextLocation)
+    {
+        if (nextLocation. getName(). equals("Library"))
+        {
+            if (player.hasItem(Items.BOOK))
+            {
+                return true;
+            }
+        } //TODO must add all other locations
+
+        return false;
     }
 
     /** 

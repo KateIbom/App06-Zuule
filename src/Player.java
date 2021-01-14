@@ -16,4 +16,18 @@ public class Player
         experience = 0;
         itemList =  new ArrayList<>();
     }
+    public boolean hasItem(Items targetItem)
+    {
+        for (Items item : itemList)
+        {
+            if (item == targetItem)
+                return true;
+        }
+        return false;
+    }
+
+    public void takeItem(Items item)
+    {
+        itemList.add(item);
+    }
 }
