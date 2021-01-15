@@ -101,7 +101,7 @@ public class Game
                 break;
 
             case TAKE:
-
+                takeItem();
                 break;
 
             case QUIT:
@@ -117,6 +117,9 @@ public class Game
                 currentLocation.getContainedItem() +"\n");
 
         player.takeItem(currentLocation.getContainedItem());
+        currentLocation.removeContainedItem();
+        printStatus();
+
     }
 
     // implementations of user commands:
@@ -168,33 +171,26 @@ public class Game
             if (player.hasItem(nextLocation.getRequiredItem()))
             {
                 currentLocation = nextLocation;
-                System.out.println(currentLocation.getLongDescription());
-                currentLocation.printItem();
+                printStatus();
             }
             else {
                 System.out.println("You cannot enter this room because you do not have a" + nextLocation.getRequiredItem());
-                currentLocation.printItem();
-                System.out.println(currentLocation.getLongDescription());
-                currentLocation.printItem();
+                printStatus();
+
             }
 
         }
+
     }
 
-    private boolean canEnterLocation(Location nextLocation)
+    public void printStatus()
     {
-        if (nextLocation. getName(). equals("Library"))
-        {
-            if (player.hasItem(Items.BOOK))
-            {
-                return true;
-            }
-        } //TODO must add all other locations
-
-        return false;
+        System.out.println(currentLocation.getLongDescription());
+        currentLocation.printItem();
+        player.printStatus();
     }
 
-    /** 
+    /**
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.
      * @return true, if this command quits the game, false otherwise.

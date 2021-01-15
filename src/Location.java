@@ -82,7 +82,7 @@ public class Location
 
     {
 
-        return "You are " + description + " " + description +
+        return "You are " +  description +
                 ".\n" + getExitString() +
                 "\n Item in the room is " + containedItem;
     }

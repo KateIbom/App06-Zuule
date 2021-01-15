@@ -88,7 +88,19 @@ public class Map
     private void setRequiredItems ()
     {
         library.setRequiredItem(Items.BOOK);
-    }//TODO complete for every location
+        townCenter.setRequiredItem(Items.COIN);
+        townHall.setRequiredItem(Items.COIN);
+        clockTower.setRequiredItem(Items.COIN);
+        pharmacy.setRequiredItem(Items.MASTER_KEY);
+        superMarket.setRequiredItem(Items.PEPPER_SPRAY);
+        barclaysBank.setRequiredItem(Items.CHEQUE);
+        postOffice.setRequiredItem(Items.LETTER);
+        courtHouse.setRequiredItem(Items.COIN);
+        judgesOffice.setRequiredItem(Items.RING);
+        jail.setRequiredItem(Items.LAW);
+    }
+
+
 
 
     /**

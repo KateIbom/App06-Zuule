@@ -29,5 +29,49 @@ public class Player
     public void takeItem(Items item)
     {
         itemList.add(item);
+        if (item == Items.COIN)
+        {
+            score = score + 2;
+        }
+    }
+
+    public void setScore(int score)
+    {
+        this.score = score;
+    }
+
+    public int getScore()
+    {
+        return score;
+    }
+
+    public void setHealth(int health)
+    {
+        this.health = health;
+    }
+
+    public int getHealth()
+    {
+        return health;
+    }
+
+    public void setExperience(int experience)
+    {
+        this.experience = experience;
+    }
+
+    public int getExperience()
+    {
+        return experience;
+
+    }
+
+    public void printStatus()
+    {
+        System.out.println("player status! ");
+        System.out.println("score = " + score);
+        System.out.println("Health = " + health);
+        System.out.println("experience = " + experience);
+
     }
 }
