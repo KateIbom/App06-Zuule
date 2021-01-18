@@ -4,6 +4,7 @@ public class Player
 {
     private String name;
     private int experience;
+    //private int ArrayList <Location> goLocation;
 
     private ArrayList <Items> itemList;
     private int score;
@@ -14,6 +15,7 @@ public class Player
         score = 0;
         health = 100;
         experience = 0;
+        //location = 0;
         itemList =  new ArrayList<>();
     }
     public boolean hasItem(Items targetItem)
@@ -34,6 +36,8 @@ public class Player
             score = score + 2;
         }
     }
+    //public boolean enterLocation()
+       // for ()
 
     public void setScore(int score)
     {
