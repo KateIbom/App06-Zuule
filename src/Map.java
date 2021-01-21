@@ -87,17 +87,17 @@ public class Map
 
     private void setRequiredItems ()
     {
-        library.setRequiredItem(Items.BOOK);
-        townCenter.setRequiredItem(Items.COIN);
-        townHall.setRequiredItem(Items.COIN);
+        library.setRequiredItem(Items.LAW);
+        townCenter.setRequiredItem(Items.CHEQUE);
+        townHall.setRequiredItem(Items.MASTER_KEY);
         clockTower.setRequiredItem(Items.COIN);
-        pharmacy.setRequiredItem(Items.MASTER_KEY);
+        pharmacy.setRequiredItem(Items.COIN);
         superMarket.setRequiredItem(Items.PEPPER_SPRAY);
         barclaysBank.setRequiredItem(Items.CHEQUE);
         postOffice.setRequiredItem(Items.LETTER);
         courtHouse.setRequiredItem(Items.COIN);
-        judgesOffice.setRequiredItem(Items.RING);
-        jail.setRequiredItem(Items.LAW);
+        judgesOffice.setRequiredItem(Items.COIN);
+        jail.setRequiredItem(Items.CHEQUE);
     }
 
 

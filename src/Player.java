@@ -39,9 +39,9 @@ public class Player
     //public boolean enterLocation()
        // for ()
 
-    public void setScore(int score)
+    public void incScore(int amount)
     {
-        this.score = score;
+        this.score = score + amount;
     }
 
     public int getScore()
@@ -59,9 +59,9 @@ public class Player
         return health;
     }
 
-    public void setExperience(int experience)
+    public void incExperience(int amount)
     {
-        this.experience = experience;
+        this.experience = experience + amount;
     }
 
     public int getExperience()

@@ -63,8 +63,10 @@ public class Game
     private void printWelcome()
     {
         System.out.println();
-        System.out.println("Welcome to the World of Zuul!");
-        System.out.println("World of Zuul is a new, incredibly boring adventure game.");
+        System.out.println("Welcome to your local town Center!");
+        System.out.println("Your local town center is a new and fun " +
+                "adventure game where rewards are gained through coins .");
+        System.out.println("Beware of the judges office... it may get you locked up!!.");
         System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
         System.out.println();
         System.out.println(currentLocation.getLongDescription());
@@ -171,10 +173,12 @@ public class Game
             if (player.hasItem(nextLocation.getRequiredItem()))
             {
                 currentLocation = nextLocation;
+                player.incExperience(5);
                 printStatus();
             }
             else {
-                System.out.println("You cannot enter this room because you do not have a" + nextLocation.getRequiredItem());
+                System.out.println("You cannot enter this room because" +
+                        " \n you do not have a" + nextLocation.getRequiredItem());
                 printStatus();
 
             }
